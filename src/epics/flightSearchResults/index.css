@@ -1,0 +1,134 @@
+.srch-results-cont{
+	float: left;
+	width: 100%;
+}
+
+.srch-criteria{
+	padding: 16px;
+	width: 100%;
+	display: inline-block;
+}
+
+.srch-error {
+	margin-top: 16px;
+}
+
+.srch-filter{
+	float: left;
+	width: 100%;
+	display: inline-block;
+}
+
+.filter-title{
+	float: left;
+	padding-left: 16px;
+}
+
+.slider-cont{
+	float: left;
+	width: 100%;
+	padding: 0 16px;
+}
+
+.filter-range{
+	float: left;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 16px;
+}
+
+.date-info-cont{
+	float: right;
+	display: inline-block;
+	font-size: 13px;
+}
+
+.date-info{
+	float: left;
+	width: 100%;
+	text-align: right;
+}
+
+.flt-result{
+	padding: 16px;
+	margin-top: 16px;
+	width: 100%;
+	display: flex;
+}
+
+.flt-info-section{
+	float: left;
+	width: 70%;
+}
+
+.flt-info{
+	float: left;
+	width: 50%;
+}
+
+.flt-action-section{
+	float: left;
+	width: 30%;
+	flex: 1;
+	display: flex;
+	justify-content: center;
+}
+
+.flt-sel-btn {
+	align-self: flex-end;
+}
+
+.flt-fare{
+	float: left;
+	width: 100%;
+	font-size: 22px;
+	margin: 4px 0;
+}
+
+.flt-info-txt{
+	float: left;
+	width: 100%;
+	margin: 4px 0;
+	font-size: 13px;
+}
+
+.flt-no{
+	font-size: 11px;
+}
+
+@media only screen and (max-width: 768px) {
+
+		.srch-filter{
+			display: none;
+		}
+
+		.date-info-cont{
+			width: 100%;
+			margin-top: 8px;
+		}
+
+		.date-info {
+			text-align: left;
+		}
+
+
+	}
+
+
+@media only screen and (max-width: 480px) {
+
+	.flt-result {
+		display: inline-block;
+	}
+
+	.flt-info-section{
+		width: 100%;
+	}
+
+	.flt-action-section {
+		padding-top: 16px;
+		width: 100%;
+		justify-content: flex-end;
+	}
+
+}

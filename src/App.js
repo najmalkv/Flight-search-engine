@@ -1,25 +1,48 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import FlightSearch from './epics/flightSearch';
+import FlightSearchResults from './epics/flightSearchResults';
+import FlightSearchFilter from './epics/flightSearchResults/components/searchFilter';
+import Divider from '@material-ui/core/Divider';
+import { Route } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+      <div className="app">
+        <header className="app-header">
+          <h1>Flight Search Engine</h1>
+           <Divider light/>
         </header>
+
+        <main className="main">
+          <section className="search-form">
+             <Route
+                path="/"
+                render={({ history }) => (
+                  <FlightSearch key={history.location.pathname} history={history}/>
+                )}
+              />
+              <Route
+                path="/search"
+                render={({ history }) => (
+                  <FlightSearchFilter history={history}/>
+                )}
+              />
+          </section>
+           <section className="search-results">
+             <Route
+                path="/search/:from/:to/:fromCity/:toCity/:srTyp/:depDate/:retDate?/:pax"
+                render={({ history, match}) => (
+                  <FlightSearchResults key={
+                    Object.values(match.params).join('-')
+                  } history={history} params={match.params}/>
+                )}
+              />
+          </section>
+
+        </main>
       </div>
     );
   }
