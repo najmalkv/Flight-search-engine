@@ -18,9 +18,10 @@ class FlightSearchResults extends Component {
 		const {params, setAllSearchParams, setResults, clearResults, setFilterValue} = this.props
 		const {from, to, fromCity, toCity, srTyp, depDate, retDate, pax} = params
 
-
+		// reset results
 		clearResults()
 
+		// intialize search based on url parameters
 		this.state = {
 			from: from,
 			to: to,
@@ -34,6 +35,7 @@ class FlightSearchResults extends Component {
 			pax: pax
 		}
 
+		// update store with the url parameters
 		setAllSearchParams({
 			from: from,
 			to: to,
@@ -45,6 +47,7 @@ class FlightSearchResults extends Component {
 			pax: pax
 		})
 
+		//filter results based on search parameters
 		const filteredFlights =  srTyp === 'R' ? allFlightsData.filter((flight)=>
 				flight.from === from && flight.to === to && flight.depDate === depDate && flight.retDate === retDate
 				).sort((a,b) => a.fare - b.fare)
@@ -52,8 +55,11 @@ class FlightSearchResults extends Component {
 				flight.from === from && flight.to === to && flight.depDate === depDate && flight.srTyp === srTyp
 				).sort((a,b) => a.fare - b.fare)
 
+
+		// update store with the results
 		setResults(filteredFlights)
 
+		//intialize filter values based on results
 		const minMaxFares = minMax(filteredFlights, 'fare')
 		setFilterValue({lower: minMaxFares[0], upper: minMaxFares[1]})
 

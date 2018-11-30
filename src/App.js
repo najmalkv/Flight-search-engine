@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div className="app">
         <header className="app-header">
-          <h1>Flight Search Engine</h1>
+          <h1 onClick={() => window.location.href = '/'}>Flight Search Engine</h1>
            <Divider light/>
         </header>
 

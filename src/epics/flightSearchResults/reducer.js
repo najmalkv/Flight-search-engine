@@ -2,7 +2,7 @@ import * as actions from './actions'
 
 
 
-let intialState = {
+export const intialState = {
 	results: [],
 	filterValue: {
 		lower: 0,

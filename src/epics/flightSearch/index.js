@@ -26,6 +26,7 @@ class FlightSearch extends Component {
 		}
 	}
 
+
 	handleSearchTypeChange = (event, value) => {
 		const {setSearchType} = this.props
 

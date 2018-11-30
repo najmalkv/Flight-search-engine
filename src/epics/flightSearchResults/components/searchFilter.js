@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 
 
 import Paper from '@material-ui/core/Paper';
-import { Slider } from 'material-ui-slider';
-
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 import {minMax} from '../../../utils/helper';
 import * as actions from '../actions'
 
+const Range = Slider.Range
 
 class FlightSearchFilter extends Component {
 
@@ -20,41 +21,43 @@ class FlightSearchFilter extends Component {
 		}
 	}
 
-	handleChange = (minVal, maxVal) => (value) => {
+	handleChange = (value) => {
 
 
 		this.setState({sliderValue: value})
 
+		const minMaxFares = this.getMinMaxValues(value)
+
 		const {setFilterValue} = this.props
-		setFilterValue({lower: minVal, upper: maxVal})
-
-
-	}
-
-	handleSetFilterVal = (minVal, maxVal) => {
+		setFilterValue({lower: minMaxFares[0], upper: minMaxFares[1]})
 
 	}
 
-	render(){
+	getMinMaxValues = (sliderValue) => {
 		const {searchResults} = this.props
-		const {sliderValue} = this.state
+
 
 		const minMaxFares = minMax(searchResults.results, 'fare')
 		const minVal = parseInt(minMaxFares[0],10) + (sliderValue[0] * ((minMaxFares[1] - minMaxFares[0])/100))
 		const maxVal = parseInt(minMaxFares[1],10) - ((100 - sliderValue[1]) * ((minMaxFares[1] - minMaxFares[0])/100))
+
+		return [minVal, maxVal]
+	}
+
+	render(){
+
+		const {sliderValue} = this.state
+
+		const minMaxFares = this.getMinMaxValues(sliderValue)
+		const minVal = minMaxFares[0]
+		const maxVal = minMaxFares[1]
 
 		return(
 
 				minVal && maxVal && minVal !== maxVal ? <Paper className="srch-filter">
 					<h4 className="filter-title">Refine Flight Search</h4>
 					<div className="slider-cont">
-						<Slider
-				          value={sliderValue}
-				          range={true}
-				          aria-labelledby="label"
-				          onChange={this.handleChange(minVal, maxVal)}
-				          fullWidth
-				        />
+				       <Range allowCross={false}   value={sliderValue} onChange={this.handleChange} />
 					</div>
 					<div className="filter-range">
 						&#8377;{minVal} - &#8377;{maxVal}
